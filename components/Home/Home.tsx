@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import React from 'react'
+import { Text, StyleSheet, View, Button } from 'react-native'
 
-export default class Home extends Component {
-    render() {
-        return (
+export default function Home ({navigation}: {navigation: any}) {
+    return (
             <View style={styles.container}>
                 <Text> Home </Text>
+                <Button title="Profile" onPress={()=>navigation.navigate('SharedTodo')}/>
             </View>
         )
-    }
 }
 
 const styles = StyleSheet.create({
