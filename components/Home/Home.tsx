@@ -1,11 +1,14 @@
 import React from 'react'
 import { Text, StyleSheet, View, Button } from 'react-native'
+import { useDispatch } from 'react-redux';
+import { Login } from '../../redux/action/Login';
 
 export default function Home ({navigation}: {navigation: any}) {
+  const dispatch = useDispatch();
     return (
             <View style={styles.container}>
                 <Text> Home </Text>
-                <Button title="Profile" onPress={()=>navigation.navigate('SharedTodo')}/>
+                <Button title="Log Out" onPress={() =>dispatch(Login(false))}/>
             </View>
         )
 }
