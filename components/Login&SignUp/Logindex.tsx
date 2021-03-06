@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import { Login} from '../../redux/action/Login';
 
-export default function Logindex(props:any) {
+export default function Logindex({navigation}:any) {
     const dispatch = useDispatch();
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.logo}></View>
             <View style={styles.logview}>
                 <View style={{
@@ -37,7 +38,7 @@ export default function Logindex(props:any) {
                         right: '15%',
                         justifyContent: 'center',
                     }}
-                    onPress={() =>dispatch(Login(true))}
+                    onPress={() =>navigation.push('Login')}
                     >
                         <Text style={{
                             paddingHorizontal: 30,
@@ -54,7 +55,7 @@ export default function Logindex(props:any) {
                         left: '15%',
                         justifyContent: 'center',
                     }}
-                    onPress={() =>dispatch(Login(false))}
+                    onPress={()=>navigation.push('Register')}
                     >
                         <Text style={{
                             paddingHorizontal: 30,
@@ -67,7 +68,7 @@ export default function Logindex(props:any) {
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 

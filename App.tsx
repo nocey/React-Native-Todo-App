@@ -9,6 +9,9 @@ import SharedTodo from './components/SharedTodo/SharedTodo';
 import Logindex from './components/Login&SignUp/Logindex';
 import { Provider, useSelector } from 'react-redux';
 import store from './redux/store';
+import Login from './components/Login&SignUp/Login';
+import SignUp from './components/Login&SignUp/SignUp';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,19 +38,43 @@ const ProfileTabs = () => {
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen name="Profile" component={Profile} />
+      <SettingsStack.Screen name="Test" component={Logindex} />
     </SettingsStack.Navigator>
   );
 }
 
+const LoginInside = () => {
+  return (
+      <SettingsStack.Navigator>
+        <SettingsStack.Screen name="Logindex" component={Logindex} options={
+          {headerShown: false}
+        } />
+        <SettingsStack.Screen name="Login" component={Login} options={
+          {headerShown: false}
+        }/>
+        <SettingsStack.Screen name="Register" component={SignUp}  options={
+          {headerShown: false}
+        }/>
+      </SettingsStack.Navigator>
+
+  )
+}
+
 
 function MyTabs() {
-  const login = useSelector( state =>state.Login)
+  const login = useSelector(state => state.Login)
   console.log(login)
-  useEffect(() => {
-    return () => {
-    }
-  }, [])
   if (login) {
+    return (
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Tab.Navigator tabBar={() => null}>
+            <Tab.Screen name="Login" component={LoginInside} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    )
+  } else {
     return (
       <NavigationContainer>
         <Tab.Navigator>
@@ -58,7 +85,6 @@ function MyTabs() {
       </NavigationContainer>
     );
   }
-  return <Logindex />
 }
 
 
